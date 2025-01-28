@@ -10,7 +10,7 @@ Grand Central Dispatch (GCD) manages threads, providing global and private queue
   - **User Interactive**: For immediate tasks like touch gestures.
   - **User Initiated**: Tasks initiated by the user, e.g., opening a file.
   - **Utility**: Long-running tasks like networking or data processing.
-  - **Background**: Non-critical tasks like backups or maintenance.
+  - **Background**: Non-critical tasks like prefetching, synchronizing with remote server, backups or maintenance.
   - Default QoS is used if none is specified.
 
 #### **Private Queues**
