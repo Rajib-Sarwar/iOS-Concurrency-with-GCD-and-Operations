@@ -6,6 +6,10 @@ Grand Central Dispatch (GCD) manages threads, providing global and private queue
 
 #### **Global Queues**
 - **Main Queue**: Serial, used for UI updates on the main thread.
+```swift
+DispatchQueue.main
+```
+
 - **Other Global Queues**: Concurrent, support multiple threads with varying priorities (Quality of Service, QoS):
   - **User Interactive**: For immediate tasks like touch gestures.
   - **User Initiated**: Tasks initiated by the user, e.g., opening a file.
@@ -13,10 +17,27 @@ Grand Central Dispatch (GCD) manages threads, providing global and private queue
   - **Background**: Non-critical tasks like prefetching, synchronizing with remote server, backups or maintenance.
   - Default QoS is used if none is specified.
 
+```swift
+DispatchQueue.global(qos: .userInteractive)
+DispatchQueue.global(qos: .userInitiated)
+DispatchQueue.global(qos: .utility)
+DispatchQueue.global(qos: .background)
+DispatchQueue.global() // assigned .default qos
+DispatchQueue.global(qos: .unspecified)
+```
+
 #### **Private Queues**
 - Created with a label and optional QoS or attributes.
 - **Serial by Default**: Ensure thread safety for shared resources.
 - **Concurrent Attribute**: Allows multiple threads for debugging or implementing barriers.
+```swift
+// Creating a private serial queue (default behavior)
+let serialQueue = DispatchQueue(label: "com.example.serialQueue")
+
+// Creating a private concurrent queue
+let concurrentQueue = DispatchQueue(label: "com.example.concurrentQueue", qos: .utility, attributes: .concurrent)
+
+```
 
 #### **Task Dispatch**
 - **Asynchronous (async)**: The current queue continues without waiting.
